@@ -37,7 +37,7 @@ pipelines:
         keep_artifacts: false
         clean_workspace: false
         approval:
-          type: manual
+          type: success
           allow_only_on_success: false
         jobs:
           Prod:
@@ -45,6 +45,6 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - '"Prod"'
+                - '"Pipeline as Code"'
                 command: echo
                 run_if: passed
