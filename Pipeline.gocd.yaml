@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  Pipeline:
+  Pipeline-Code:
     group: sample
     label_template: ${COUNT}
     lock_behavior: none
