@@ -45,6 +45,6 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - '"Pipeline as Code"'
+                - '"Pipeline as Code Production"'
                 command: echo
                 run_if: passed
