@@ -1,0 +1,50 @@
+format_version: 10
+pipelines:
+  Pipeline:
+    group: sample
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-9b5326a:
+        git: https://github.com/gocd-contrib/getting-started-repo.git
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+    - QA:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          Job:
+            timeout: 0
+            secure_variables:
+              PASSWORD: AES:oY3igMR4r3wvLPj2FsnVEw==:cqFAZK/fZ/I/YCPrvud6JQ==
+            artifacts:
+            - build:
+                source: my-artifact.html
+                destination: ''
+            tasks:
+            - exec:
+                command: ./build
+                run_if: passed
+    - Prod:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: manual
+          allow_only_on_success: false
+        jobs:
+          Prod:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Prod"'
+                command: echo
+                run_if: passed
